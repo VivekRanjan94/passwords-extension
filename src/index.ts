@@ -7,7 +7,7 @@ import mongoose from 'mongoose'
 import { Password } from './Schema/Password'
 
 const app = express()
-const PORT = 5000
+const PORT = process.env.PORT || 5000
 
 const allowedOrigins = [process.env.ORIGIN]
 
@@ -93,6 +93,6 @@ const savePassword = async (
   return { success: true, password: newPassword }
 }
 
-app.listen(process.env.PORT || PORT, () => {
-  console.log(`Server started at port ${process.env.PORT || PORT}`)
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server started at port ${PORT}`)
 })
