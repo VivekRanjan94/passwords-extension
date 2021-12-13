@@ -27,6 +27,10 @@ try {
   console.error('Could not connect MongoDB', e)
 }
 
+app.get('/', (req, res) => {
+  res.send('hello world')
+})
+
 app.get('/get-all-passwords', async (req, res) => {
   try {
     const passwords = await Password.find({})
@@ -90,5 +94,5 @@ const savePassword = async (
 }
 
 app.listen(process.env.PORT || PORT, () => {
-  console.log(`Server started at port ${PORT}`)
+  console.log(`Server started at port ${process.env.PORT || PORT}`)
 })
