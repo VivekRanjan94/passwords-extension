@@ -80,22 +80,44 @@ const PasswordProvider: React.FC<Props> = ({ children }) => {
     Password[] | []
   >([])
   const [url, setUrl] = useState<string>('')
+  const [env, setEnv] = useState<{ SERVER_URL: string }>({ SERVER_URL: '' })
 
   useEffect(() => {
     chrome.runtime.onMessage.addListener((msg) => {
-      setUrl(msg.url)
+      if (msg.type === 'url') {
+        setUrl(msg.url)
+      }
+      if (msg.type === 'env') {
+        setEnv(msg.env)
+      }
     })
 
     getUrl()
+    getEnv()
+  }, [])
+
+  useEffect(() => {
+    if (env.SERVER_URL === '') {
+      return
+    }
 
     getAllPasswords()
-  }, [])
+  }, [env])
 
   const getUrl = () => {
     chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
       const activeTab = tabs[0]
       chrome.tabs.sendMessage(activeTab.id || 1, {
-        sender: 'popup',
+        request: 'url',
+      })
+    })
+  }
+
+  const getEnv = () => {
+    chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
+      const activeTab = tabs[0]
+      chrome.tabs.sendMessage(activeTab.id || 1, {
+        request: 'env',
       })
     })
   }
@@ -118,15 +140,13 @@ const PasswordProvider: React.FC<Props> = ({ children }) => {
 
   const getAllPasswords = async () => {
     setAllPasswords(testData)
-    console.log(process)
-    console.log(process.env)
 
     interface Response {
       success: boolean
       list: Password[]
     }
     const { data } = await axios.get<Response>(
-      `${process.env.SERVER_URL}/get-all-passwords`
+      `${env.SERVER_URL}/get-all-passwords`
     )
 
     if (data.success) {
@@ -154,7 +174,7 @@ const PasswordProvider: React.FC<Props> = ({ children }) => {
     }
 
     const { data } = await axios.post<Response>(
-      `${process.env.SERVER_URL}/save-password`,
+      `${env.SERVER_URL}/save-password`,
       {
         website,
         email,
