@@ -1,6 +1,6 @@
 {
-  "name": "React Typescript Extension",
-  "description": "Typescript extension created using react and webpack!",
+  "name": "Password Manager",
+  "description": "Password manager chrome extension",
   "version": "1.0",
   "manifest_version": 2,
   "browser_action": {
