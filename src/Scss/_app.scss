@@ -1,0 +1,14 @@
+@forward 'header';
+@forward './Pages/Add';
+@forward './Pages/Generator';
+@forward './Pages/Vault';
+
+#root {
+  margin: 0 auto;
+  width: 20rem;
+  height: 35rem;
+}
+
+.App {
+  height: 100%;
+}

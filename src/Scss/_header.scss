@@ -1,0 +1,44 @@
+@use './variables';
+
+.header {
+  background-color: variables.$lightBluePrimary;
+  padding: 1rem 0;
+
+  .links {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    .link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &.active {
+        color: variables.$darkBluePrimary;
+
+        .link-text {
+          border-bottom: 3px solid variables.$darkBluePrimary;
+        }
+
+        svg {
+          fill: variables.$darkBluePrimary;
+        }
+      }
+    }
+  }
+
+  &.alternate {
+    background-color: variables.$darkBlueSecondary;
+
+    svg {
+      fill: variables.$lightBluePrimary;
+    }
+
+    color: variables.$lightBluePrimary;
+  }
+}

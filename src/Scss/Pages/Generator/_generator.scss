@@ -1,0 +1,111 @@
+@use '../../variables';
+
+.generator {
+  font-size: 1.125rem;
+  user-select: none;
+
+  .top {
+    background-color: variables.$lightBluePrimary;
+    padding: 2rem 3rem;
+
+    .btn {
+      margin-top: 1rem;
+      padding: 0.25rem 0.5rem;
+      color: white;
+      border-radius: 3px;
+      background-color: variables.$darkBluePrimary;
+      border: none;
+
+      transition: background-color 200ms ease;
+
+      &:hover {
+        cursor: pointer;
+        background-color: lighten(variables.$darkBluePrimary, 5);
+      }
+    }
+
+    .output-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      user-select: text;
+
+      background-color: white;
+      border-radius: 0.5rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+
+      .output-text {
+        max-width: 10rem;
+        overflow-wrap: break-word;
+      }
+
+      .icon {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .length {
+    padding: 1rem;
+    margin-bottom: 1rem;
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    input {
+      width: 100%;
+      position: relative;
+      -webkit-appearance: none;
+      background: #d3d3d3;
+      border-radius: 10rem;
+
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 1rem;
+        height: 1rem;
+        border-radius: 10rem;
+        background: variables.$darkBluePrimary;
+      }
+
+      &::-moz-range-thumb {
+        // width: 25px;
+        // height: 25px;
+        background: #04aa6d;
+      }
+
+      &::before,
+      &::after {
+        position: absolute;
+        transform: translateY(100%);
+      }
+
+      &::before {
+        left: 0;
+        content: '4';
+      }
+      &::after {
+        right: 0;
+        content: '40';
+      }
+    }
+  }
+
+  .letters,
+  .digits,
+  .symbols {
+    display: flex;
+    align-items: center;
+
+    padding: 0.25rem 1rem;
+
+    input {
+      cursor: pointer;
+      margin-right: 0.5rem;
+    }
+  }
+}

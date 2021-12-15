@@ -1,0 +1,22 @@
+@forward './password';
+@forward './list';
+
+.vault {
+  height: 85%;
+  overflow-y: scroll;
+  padding: 0.5rem;
+
+  .current {
+    .title {
+      margin-bottom: 0.5rem;
+    }
+
+    margin-bottom: 1rem;
+  }
+
+  .all {
+    .title {
+      margin-bottom: 0.5rem;
+    }
+  }
+}

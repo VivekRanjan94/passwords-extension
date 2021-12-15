@@ -1,0 +1,29 @@
+@use '../../variables';
+
+.list {
+  width: 100%;
+
+  .password-container {
+    margin-bottom: 0.5rem;
+    &:not(:first-of-type) {
+      border-top: 1px solid transparent;
+    }
+    &:not(:last-of-type) {
+      border-bottom: 1px solid transparent;
+    }
+
+    &:hover {
+      &:not(:first-of-type) {
+        border-top: 1px solid variables.$lightBluePrimary;
+      }
+      &:not(:last-of-type) {
+        border-bottom: 1px solid variables.$lightBluePrimary;
+      }
+    }
+    .website {
+      &-text {
+        width: 100%;
+      }
+    }
+  }
+}
