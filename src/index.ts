@@ -85,12 +85,11 @@ const savePassword = async (
 
   try {
     newPassword.save()
+    return { success: true, password: newPassword }
   } catch (e) {
     console.error(e)
     return { success: false }
   }
-
-  return { success: true, password: newPassword }
 }
 
 app.listen(PORT, '0.0.0.0', () => {
