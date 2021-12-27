@@ -34,20 +34,21 @@ app.get('/', (req, res) => {
 app.get('/get-all-passwords', async (req, res) => {
   try {
     const passwords = await Password.find({})
+
+    passwords.sort((a, b) => {
+      if (a.name.charAt(0) < b.name.charAt(0)) {
+        return -1
+      }
+      if (a.name.charAt(0) > b.name.charAt(0)) {
+        return 1
+      }
+
+      return 0
+    })
+
     return res.status(200).json({ success: true, list: [...passwords] })
   } catch (e) {
     return res.status(503).json({ success: false, list: [] })
-  }
-})
-
-app.get('/get-passwords', async (req, res) => {
-  const { url } = req.query
-
-  try {
-    const passwords = await Password.find({ website: url })
-    return res.status(200).json({ success: true, list: [...passwords] })
-  } catch (e) {
-    return res.status(503).json({ success: false, passwords: [] })
   }
 })
 
@@ -63,6 +64,29 @@ app.post('/save-password', async (req, res) => {
         .json({ success: true, password: response.password })
     }
     return res.status(503).json({ success: false })
+  } catch (e) {
+    console.error(e)
+    return res.status(503).json({ success: false })
+  }
+})
+
+app.post('/delete-password', async (req, res) => {
+  const { id } = req.body
+
+  try {
+    Password.remove({ _id: id }, (err) => {
+      if (err) {
+        return res.status(503).json({
+          success: false,
+          message: 'Could not get password',
+          error: err,
+        })
+      }
+
+      return res
+        .status(200)
+        .json({ success: true, message: 'Password deleted' })
+    })
   } catch (e) {
     console.error(e)
     return res.status(503).json({ success: false })
