@@ -1,0 +1,11 @@
+@use '../../variables';
+
+.list-search {
+  margin-bottom: 1rem;
+
+  input {
+    border-radius: 5px;
+    border: 1px solid variables.$darkBluePrimary;
+    padding: 0.25rem;
+  }
+}

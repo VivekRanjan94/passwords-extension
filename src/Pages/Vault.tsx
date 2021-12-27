@@ -1,6 +1,8 @@
 import List from '../components/List'
-import { usePassword } from '../Components/Contexts/PasswordContext'
+import { Password, usePassword } from '../Components/Contexts/PasswordContext'
+import { useState } from 'react'
 
+// Vault component
 const Vault: React.FC = () => {
   const { currentWebsitePasswords, allPasswords } = usePassword()
 
@@ -13,12 +15,12 @@ const Vault: React.FC = () => {
             <p>No passwords are saved for this website</p>
           </>
         ) : (
-          <List list={currentWebsitePasswords} />
+          <List list={currentWebsitePasswords} canSearch={false} />
         )}
       </div>
       <div className='all'>
         <h2 className='title'>All</h2>
-        <List list={allPasswords} />
+        <List list={allPasswords} canSearch={true} />
       </div>
     </div>
   )

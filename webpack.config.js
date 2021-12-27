@@ -9,6 +9,7 @@ module.exports = {
   entry: {
     index: './src/index.tsx',
     content: './src/scripts/content.ts',
+    background: './src/scripts/background.ts',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

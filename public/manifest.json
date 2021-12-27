@@ -12,5 +12,9 @@
       "js": ["content.js"]
     }
   ],
-  "permissions": ["tabs"]
+  "permissions": ["tabs"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  }
 }
