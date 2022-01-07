@@ -1,8 +1,8 @@
 import { Link, useLocation } from 'react-router-dom'
 
-import Vault from '../Assets/lock_black_24dp.svg'
-import Add from '../Assets/add_black_24dp.svg'
-import Generate from '../Assets/password_black_24dp.svg'
+import Vault from '../Assets/lock.svg'
+import Add from '../Assets/add.svg'
+import Generate from '../Assets/password.svg'
 
 const Header: React.FC = () => {
   const { pathname } = useLocation()

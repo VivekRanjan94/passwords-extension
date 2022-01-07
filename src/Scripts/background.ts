@@ -14,10 +14,14 @@ const getAllPasswords = async () => {
 
   if (data.success) {
     passwordList = [...data.list]
+    console.log(data)
+    console.log('ready')
   }
 }
 
-getAllPasswords()
+chrome.runtime.onStartup.addListener(() => {
+  getAllPasswords()
+})
 
 const saveNewPassword = async (
   name: string,

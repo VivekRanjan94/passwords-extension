@@ -3,8 +3,12 @@
   "description": "Password manager chrome extension",
   "version": "1.0",
   "manifest_version": 2,
+  "background": {
+    "scripts": ["background.js"]
+  },
   "browser_action": {
-    "default_popup": "index.html"
+    "default_popup": "index.html",
+    "default_icon": "popup.png"
   },
   "content_scripts": [
     {
@@ -12,9 +16,5 @@
       "js": ["content.js"]
     }
   ],
-  "permissions": ["tabs"],
-  "background": {
-    "scripts": ["background.js"],
-    "persistent": false
-  }
+  "permissions": ["tabs", "alarms"]
 }

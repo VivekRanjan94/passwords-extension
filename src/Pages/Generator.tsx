@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import Refresh from '../Assets/refresh_black_24dp.svg'
+import Refresh from '../Assets/refresh.svg'
 
 const LETTERS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 const DIGITS = '1234567890'

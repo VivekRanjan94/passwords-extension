@@ -1,8 +1,13 @@
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
-import CopyIcon from '../Assets/content_copy_black_24dp.svg'
-import LaunchIcon from '../Assets/open_in_new_black_24dp.svg'
+import CopyIcon from '../Assets/copy.svg'
+import LaunchIcon from '../Assets/open_in_new.svg'
+import ShowIcon from '../Assets/show.svg'
+import HideIcon from '../Assets/hide.svg'
+import EditIcon from '../Assets/edit.svg'
+import SaveIcon from '../Assets/save.svg'
+
 import {
   Password as IPassword,
   usePassword,
@@ -13,6 +18,8 @@ interface Props {}
 const Password: React.FC<Props> = () => {
   const { getPasswordById } = usePassword()
   const location = useLocation()
+  const [canEdit, setCanEdit] = useState<boolean>(false)
+  const [showPassword, setShowPassword] = useState<boolean>(false)
 
   const [password, setPassword] = useState<IPassword>({
     _id: '',
@@ -28,12 +35,35 @@ const Password: React.FC<Props> = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const save = () => {
+    setCanEdit(false)
+  }
+
   return (
     <div className='password'>
-      <h3 className='password-name'>{password.name}</h3>
+      <header>
+        <input
+          disabled={!canEdit}
+          type='text'
+          value={password.name}
+          className='password-name'
+        />
+        <EditIcon
+          className='icon'
+          onClick={() => {
+            setCanEdit(true)
+          }}
+        />
+      </header>
       <div className='password-email'>
         <div className='title'>Email</div>
-        <div className='text'>{password.email}</div>
+        <input
+          disabled={!canEdit}
+          type='text'
+          value={password.email}
+          className='text'
+        />
+
         <CopyIcon
           className='icon'
           onClick={() => {
@@ -43,17 +73,44 @@ const Password: React.FC<Props> = () => {
       </div>
       <div className='password-password'>
         <div className='title'>Password</div>
-        <div className='text'>{password.password}</div>
+        <input
+          disabled={!canEdit}
+          type={showPassword ? 'text' : 'password'}
+          value={showPassword ? password.password : 'password'}
+          className='text'
+        />
         <CopyIcon
           className='icon'
           onClick={() => {
             navigator.clipboard.writeText(password.password)
           }}
         />
+
+        {showPassword ? (
+          <HideIcon
+            className='icon'
+            onClick={() => {
+              setShowPassword(!showPassword)
+            }}
+          />
+        ) : (
+          <ShowIcon
+            className='icon'
+            onClick={() => {
+              setShowPassword(!showPassword)
+            }}
+          />
+        )}
       </div>
       <div className='password-website'>
         <div className='title'>Website</div>
-        <div className='text'>{password.website}</div>
+        <input
+          disabled={!canEdit}
+          type='text'
+          value={password.website}
+          className='text'
+        />
+
         <a
           className='icon'
           target='_blank'
@@ -63,6 +120,14 @@ const Password: React.FC<Props> = () => {
           <LaunchIcon />
         </a>
       </div>
+
+      {canEdit && (
+        <SaveIcon
+          onClick={() => {
+            save()
+          }}
+        />
+      )}
     </div>
   )
 }
