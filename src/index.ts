@@ -70,6 +70,27 @@ app.post('/save-password', async (req, res) => {
   }
 })
 
+app.post('/edit-password', async (req, res) => {
+  const { id, name, website, email, password } = req.body
+  // console.log(id, name, website, email, password)
+
+  try {
+    const doc = await Password.findById(id)
+
+    doc.name = name
+    doc.email = email
+    doc.website = website
+    doc.password = password
+
+    const savedPassword = await doc.save()
+
+    res.status(200).json({ success: true, password: savedPassword })
+  } catch (e) {
+    console.error(e)
+    return res.status(503).json({ success: false })
+  }
+})
+
 app.post('/delete-password', async (req, res) => {
   const { id } = req.body
 
